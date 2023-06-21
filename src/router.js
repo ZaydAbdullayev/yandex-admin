@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./page/home/home";
 import { Layout } from "./layout/layout";
 import { Sidebar } from "./components/sideBar/sidebar";
+import { Restaurant } from "./page/restaurants/restaurant";
 
 export const Router = () => {
   return (
@@ -11,6 +12,7 @@ export const Router = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Sidebar />} />
         <Route index element={<Home />} />
+        <Route path="/add/restaurant" element={<Restaurant />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

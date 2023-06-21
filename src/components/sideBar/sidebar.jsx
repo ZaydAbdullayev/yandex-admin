@@ -25,14 +25,14 @@ export const Sidebar = () => {
     <div className={isShrinkView ? "shrink" : "sidebar_container"}>
       <Link to="/">{isShrinkView ? "Y" : "Yandex@Eats"}</Link>
       <div className="shrink_box">
+        <h3 onClick={handleSidebarView}>
+          {isShrinkView ? <RiMenu2Line /> : "Dashboard Menu"}
+        </h3>
         <button onClick={handleSidebarView} type="button">
           {isShrinkView ? <HiChevronRight /> : <HiChevronLeft />}
         </button>
       </div>
       <ul className="menu_box">
-        <h3 onClick={handleSidebarView}>
-          {isShrinkView ? <RiMenu2Line /> : "Dashboard Menu"}
-        </h3>
         {menu.map((item) => {
           return (
             <Link to={item.path} key={item.id}>
