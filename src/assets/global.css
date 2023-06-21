@@ -1,0 +1,49 @@
+:root {
+    --fs1: 48px;
+    --fs2: 40px;
+    --fs3: 32px;
+    --fs4: 24px;
+    --fs5: 20px;
+    --fs6: 16px;
+    --fs7: 14px;
+    --fs8: 13px;
+    --pd1: 5% 7%;
+    --pd2: 3.5% 5%;
+    --pd3: 3% 3% 0;
+    --pd4: 4% 4% 5% 5%;
+    --gap1: 30px;
+    --gap2: 20px;
+    --gap3: 15px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+
+body {
+    width: 100%;
+}
+
+::selection {
+    background: yellow;
+    color: #cfb1b1;
+}
+
+#root {
+    width: 100%;
+    display: flex;
+    background: #333;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
