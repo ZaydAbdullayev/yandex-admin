@@ -3,6 +3,7 @@ import "./layout..css";
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/sideBar/sidebar";
 import { useSelector } from "react-redux";
+import { Navbar } from "../components/navbar/navbar";
 
 export const Layout = () => {
   const shrinkMod = useSelector((state) => state.shrink);
@@ -13,6 +14,7 @@ export const Layout = () => {
         <Sidebar />
       </aside>
       <main className={shrinkMod ? "long_main" : "main"}>
+        <Navbar />
         <Outlet />
       </main>
     </div>

@@ -11,9 +11,10 @@ import { AiFillSetting } from "react-icons/ai";
 import { HiChevronRight } from "react-icons/hi";
 import { HiChevronLeft } from "react-icons/hi";
 import { RiMenu2Line } from "react-icons/ri";
+// import { RiArrowDownSLine } from "react-icons/ri";
+// import { RiArrowUpSLine } from "react-icons/ri";
 
 export const Sidebar = () => {
-  // const [isShrinkView, setIsShrinkView] = React.useState(false);
   const isShrinkView = useSelector((state) => state.shrink);
   const dispatch = useDispatch();
 

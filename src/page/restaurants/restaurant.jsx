@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { MdOutlineAddBusiness } from "react-icons/md";
 
+const base_url = process.env.REACT_APP_BASE_URL;
 export const Restaurant = () => {
   const [files, setFiles] = useState([]);
 
@@ -12,11 +13,10 @@ export const Restaurant = () => {
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
     console.log(data);
-    e.target.reset();
 
     const config = {
-      url: "https://server.pandashop.uz/fashion",
-      method: "POST",
+      url: `${base_url}/add/restaurant`,
+      method: "post",
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -26,6 +26,7 @@ export const Restaurant = () => {
     axios(config)
       .then((res) => {
         console.log(res);
+        e.target.reset();
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +41,6 @@ export const Restaurant = () => {
     const img = URL.createObjectURL(file);
     setFiles([img]);
   };
-  console.log(files);
 
   return (
     <div className="restaurant_box">
@@ -70,9 +70,9 @@ export const Restaurant = () => {
         <div className="delivery_time">
           <p>Yetkazib berish vaqtini kiriting</p>
           <label>
-            <input type="number" name="from" required />
+            <input type="number" name="delivery_time_from" required />
             <p>dan</p>
-            <input type="number" name="to" required />
+            <input type="number" name="delivery_time_till" required />
             <p>gacha</p>
           </label>
         </div>
@@ -84,7 +84,7 @@ export const Restaurant = () => {
         />
         <input
           type="text"
-          name="raiting"
+          name="rating"
           placeholder="Restoranning reytingi"
           required
         />

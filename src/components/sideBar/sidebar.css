@@ -5,6 +5,7 @@
     flex-direction: column;
     background: #444;
     transition: all 0.7 ease;
+    border-right: 1px solid #cccccc3f;
 }
 
 
@@ -32,12 +33,13 @@
 }
 
 .shrink>:first-child {
+    padding-bottom: 5%;
     border-bottom: none;
 }
 
 .shrink .shrink_box {
-    border-top: 1px solid #fffff979;
-    border-bottom: 1px solid #fffff979;
+    border-top: 1px solid #cccccc2f;
+    border-bottom: 1px solid #cccccc2f;
     justify-content: center;
 }
 
@@ -45,7 +47,7 @@
 .shrink>a {
     font-size: var(--fs3);
     color: #fff;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #cccccc2f;
     padding: var(--pd1);
 }
 
@@ -59,7 +61,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--pd1);
-    border-bottom: 1px solid #fffff979;
+    border-bottom: 1px solid #cccccc2f;
 }
 
 .shrink_box>button {
