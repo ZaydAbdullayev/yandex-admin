@@ -99,6 +99,7 @@
     gap: var(--gap3);
     color: #fff;
     z-index: 99;
+    border: 1px solid transparent;
     text-align: center;
 }
 
