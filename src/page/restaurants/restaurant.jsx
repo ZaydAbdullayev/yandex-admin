@@ -3,16 +3,17 @@ import "./restaurant.css";
 import axios from "axios";
 
 import { MdOutlineAddBusiness } from "react-icons/md";
+import { useSnackbar } from "notistack";
 
 const base_url = process.env.REACT_APP_BASE_URL;
 export const Restaurant = () => {
   const [files, setFiles] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
-    console.log(data);
 
     const config = {
       url: `${base_url}/add/restaurant`,
@@ -25,14 +26,16 @@ export const Restaurant = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
+        console.log(res.response.message);
+        const msg = "Restoran muvoffaqiyatli qo'shildi";
+        enqueueSnackbar(msg, { variant: "success" });
         e.target.reset();
       })
       .catch((err) => {
+        const msg = "Restoran qo'shishda qandaydir xatolik yuz berdi";
+        enqueueSnackbar(msg, { variant: "error" });
         console.log(err);
-      })
-      .finally(() => {
-        console.log("done");
+        e.target.reset();
       });
   };
 
@@ -53,9 +56,10 @@ export const Restaurant = () => {
           <input
             type="file"
             name="img"
-            accept="image/jpg, image/jpeg, image/png"
+            accept="image/*"
             required
             onChange={takeImg}
+            id="image"
           />
           {files.length > 0 && (
             <img src={files[0]} alt="Selected" className="selected_image" />
