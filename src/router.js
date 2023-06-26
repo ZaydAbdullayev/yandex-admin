@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./page/home/home";
 import { Layout } from "./layout/layout";
 import { Sidebar } from "./components/sideBar/sidebar";
-import { Customer, Restaurant } from "./page/restaurants/restaurant";
+import { Restaurant } from "./page/restaurants/restaurant";
 import { Login, Sigin } from "./auth/login";
 import { Auth } from "./auth/auth";
 
@@ -28,7 +28,6 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
-            <Route path="add/restaurant" element={<Customer />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

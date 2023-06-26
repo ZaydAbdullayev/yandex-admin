@@ -17,21 +17,13 @@ export const Login = () => {
     const loginData = Object.fromEntries(formData.entries());
     const { username, password, role } = loginData;
     console.log(loginData);
-    localStorage.setItem("login", JSON.stringify(loginData));
+    const login = JSON.parse(localStorage.getItem("login")) || [];
 
-    if (username === "zayd" && password === "zayd" && role === "admin") {
-      const token = uuidv5();
-      localStorage.setItem("token", token);
-      dispatch(acLogin());
-      navigate("/");
-      setErr(false);
-    } else if (
-      username === "customer" &&
-      password === "customer" &&
-      role === "customer"
+    if (
+      username === login.username &&
+      password === login.password &&
+      role === login.role
     ) {
-      const token = uuidv5();
-      localStorage.setItem("token", token);
       dispatch(acLogin());
       navigate("/");
       setErr(false);
@@ -56,7 +48,7 @@ export const Login = () => {
     <div className="login">
       <form onSubmit={handleSubmit} id="form">
         <h1>
-          Ro'yxatdan o'tish <span onClick={sig_in}>/ Hisobga kirish</span>
+          Hisobga kirish <span onClick={sig_in}>/ Ro'yxatdan o'tish</span>
         </h1>
 
         <input
@@ -107,27 +99,16 @@ export const Login = () => {
 
 export const Sigin = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [err, setErr] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const value = Object.fromEntries(formData.entries());
-    const { username, password } = value;
-    console.log(value);
-
-    if (username === "zayd" && password === "zayd") {
-      const token = uuidv5();
-      localStorage.setItem("token", token);
-      dispatch(acLogin());
-      navigate("/");
-      setErr(false);
-    } else {
-      dispatch(acLogout());
-      setErr(true);
-      document.querySelector("#form").reset();
-    }
+    const loginData = Object.fromEntries(formData.entries());
+    localStorage.setItem("login", JSON.stringify(loginData));
+    const token = uuidv5();
+    localStorage.setItem("token", token);
+    navigate("/");
+    document.querySelector("#form").reset();
   };
 
   const [show, setShow] = useState(true);
@@ -144,7 +125,7 @@ export const Sigin = () => {
     <div className="login">
       <form onSubmit={handleSubmit} id="form">
         <h1>
-          Hisobga kirish <span onClick={log_in}>/ Ro'yxatdan o'tish</span>
+          Ro'yxatdan o'tish <span onClick={log_in}>/ Hisobga kirish</span>
         </h1>
 
         <input
@@ -155,7 +136,6 @@ export const Sigin = () => {
           autoComplete="off"
           autoCapitalize="off"
           className="input"
-          style={err ? { border: "1px solid tomato", padding: "4.5% 3%" } : {}}
         />
         <label>
           <input
@@ -165,23 +145,19 @@ export const Sigin = () => {
             required
             autoComplete="off"
             className="input"
-            style={err ? { border: "1px solid tomato" } : {}}
           />
           <span onClick={handleShow} style={show ? {} : { color: "orange" }}>
             {show ? <BsEyeSlash /> : <BsEye />}
           </span>
-          <p style={err ? { display: "flex" } : {}} className="failed">
-            Foydalanuvchi yoki parol xaroligi...!
-          </p>
         </label>
         <div className="role">
-          <p style={err ? { color: "tomato" } : {}}>Boshqaruvchi:</p>
+          <p>Boshqaruvchi:</p>
           <label>
-            <input type="radio" name="admin" value="customer" required />
+            <input type="radio" name="role" value="customer" required />
             <p>Sotuvchi</p>
           </label>
           <label>
-            <input type="radio" name="admin" value="admin" required />
+            <input type="radio" name="role" value="admin" required />
             <p>Admin</p>
           </label>
         </div>
