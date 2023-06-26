@@ -13,12 +13,10 @@
 .shrink {
     width: 100%;
     height: 100%;
-    padding-top: 20%;
     display: flex;
     flex-direction: column;
     background: #444;
     transition: all 0.7;
-    gap: var(--gap2);
 }
 
 .shrink * {
@@ -28,16 +26,19 @@
     font-size: var(--fs3);
 }
 
+
 .shrink a>p {
     display: none;
 }
 
 .shrink>:first-child {
-    padding-bottom: 5%;
+    padding: 25% 0;
     border-bottom: none;
+    text-align: center;
 }
 
 .shrink .shrink_box {
+    padding: 25% 5%;
     border-top: 1px solid #cccccc2f;
     border-bottom: 1px solid #cccccc2f;
     justify-content: center;
@@ -72,9 +73,9 @@
     color: #fff;
 }
 
-.shrink_box .shrink_box>h3 {
+/* .shrink_box>h3 {
     display: none;
-}
+} */
 
 .menu_box {
     width: 100%;
@@ -123,7 +124,6 @@
 
 .menu_box>a:focus {
     color: #17b1ea;
-    font-weight: 500;
     border: 1px solid #17b1ea;
     border-radius: 0 10px 10px 0;
     border-left: none;

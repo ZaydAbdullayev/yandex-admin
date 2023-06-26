@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { acShrink } from "../../redux/shrink";
 
 import { MdDashboard } from "react-icons/md";
-import { MdOutlineAddBusiness } from "react-icons/md";
+import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { IoIosRestaurant } from "react-icons/io";
 import { AiFillSetting } from "react-icons/ai";
 import { HiChevronRight } from "react-icons/hi";
@@ -15,6 +15,7 @@ import { RiMenu2Line } from "react-icons/ri";
 // import { RiArrowUpSLine } from "react-icons/ri";
 
 export const Sidebar = () => {
+  const login = JSON.parse(localStorage.getItem("login")) || [];
   const isShrinkView = useSelector((state) => state.shrink);
   const dispatch = useDispatch();
 
@@ -34,13 +35,21 @@ export const Sidebar = () => {
         </button>
       </div>
       <ul className="menu_box">
-        {menu.map((item) => {
-          return (
-            <Link to={item.path} key={item.id}>
-              <span>{item.icon}</span> <p>{item.name}</p>
-            </Link>
-          );
-        })}
+        {login.role === "admin"
+          ? menu.map((item) => {
+              return (
+                <Link to={item.path} key={item.id}>
+                  <span>{item.icon}</span> <p>{item.name}</p>
+                </Link>
+              );
+            })
+          : menu_customer.map((item) => {
+              return (
+                <Link to={item.path} key={item.id}>
+                  <span>{item.icon}</span> <p>{item.name}</p>
+                </Link>
+              );
+            })}
       </ul>
     </div>
   );
@@ -56,8 +65,28 @@ const menu = [
   {
     id: "0765435",
     path: "/add/restaurant",
-    name: "Add Restaurant",
-    icon: <MdOutlineAddBusiness />,
+    name: "Restaurants",
+    icon: <SiHomeassistantcommunitystore />,
+  },
+  {
+    id: "243567",
+    path: "/add/product",
+    name: "Add Product",
+    icon: <IoIosRestaurant />,
+  },
+  {
+    id: "765433",
+    path: "/settings",
+    name: "Settings",
+    icon: <AiFillSetting />,
+  },
+];
+const menu_customer = [
+  {
+    id: "098765",
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: <MdDashboard />,
   },
   {
     id: "243567",

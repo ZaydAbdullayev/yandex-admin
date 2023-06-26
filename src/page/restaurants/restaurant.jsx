@@ -93,3 +93,11 @@ export const Restaurant = () => {
     </div>
   );
 };
+
+export const Customer = () => {
+  return (
+    <div className="curtomer">
+      <h1>Sizga bu sahifaga kirish uchun ruxsat berilmagan!!!</h1>
+    </div>
+  );
+};
