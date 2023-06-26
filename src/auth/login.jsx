@@ -48,10 +48,16 @@ export const Login = () => {
     setShow(!show);
   };
 
+  const sig_in = () => {
+    navigate("/sigin");
+  };
+
   return (
     <div className="login">
       <form onSubmit={handleSubmit} id="form">
-        <h1>Ro'yxatdan o'tish</h1>
+        <h1>
+          Ro'yxatdan o'tish <span onClick={sig_in}>/ Hisobga kirish</span>
+        </h1>
 
         <input
           type="text"
@@ -99,7 +105,7 @@ export const Login = () => {
   );
 };
 
-const Sigin = () => {
+export const Sigin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [err, setErr] = useState(false);
@@ -130,30 +136,17 @@ const Sigin = () => {
     setShow(!show);
   };
 
+  const log_in = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="login">
       <form onSubmit={handleSubmit} id="form">
-        <h1>Ro'yxatdan o'tish</h1>
-        <div className="role">
-          <label>
-            <p>Foydalanuvchi</p>
-            <input
-              type="radio"
-              name="admin"
-              value="user"
-              required
-              defaultChecked
-            />
-          </label>
-          <label>
-            <p>Sotuvchi</p>
-            <input type="radio" name="admin" value="customer" required />
-          </label>
-          <label>
-            <p>Admin</p>
-            <input type="radio" name="admin" value="admin" required />
-          </label>
-        </div>
+        <h1>
+          Hisobga kirish <span onClick={log_in}>/ Ro'yxatdan o'tish</span>
+        </h1>
+
         <input
           type="text"
           name="username"
@@ -181,6 +174,17 @@ const Sigin = () => {
             Foydalanuvchi yoki parol xaroligi...!
           </p>
         </label>
+        <div className="role">
+          <p style={err ? { color: "tomato" } : {}}>Boshqaruvchi:</p>
+          <label>
+            <input type="radio" name="admin" value="customer" required />
+            <p>Sotuvchi</p>
+          </label>
+          <label>
+            <input type="radio" name="admin" value="admin" required />
+            <p>Admin</p>
+          </label>
+        </div>
         <button className="log_btn" type="submit">
           Log In
         </button>

@@ -55,6 +55,12 @@
 }
 
 .login>form>h1 {
+    font-size: var(--fs4);
+    cursor: pointer;
+    color: tomato;
+}
+
+.login>form>h1>span {
     color: #ddd;
 }
 
