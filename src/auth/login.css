@@ -58,6 +58,7 @@
     font-size: var(--fs4);
     cursor: pointer;
     color: tomato;
+    user-select: none;
 }
 
 .login>form>h1>span {

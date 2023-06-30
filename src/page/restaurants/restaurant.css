@@ -57,6 +57,10 @@
     color: #333;
 }
 
+.add_reastaurant>input[type="submit"]:active{
+    background: #17b2ea4f;
+}
+
 .add_reastaurant>input::placeholder {
     color: #17b2ea4f;
 }

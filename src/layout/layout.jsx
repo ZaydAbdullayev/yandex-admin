@@ -8,6 +8,7 @@ import { Navbar } from "../components/navbar/navbar";
 export const Layout = () => {
   const shrinkMod = useSelector((state) => state.shrink);
 
+
   return (
     <div className="layout">
       <aside className={shrinkMod ? "short_aside" : "aside"}>
