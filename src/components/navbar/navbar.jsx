@@ -3,6 +3,7 @@ import "./navbar.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { acOpenMadal, acCloseModal } from "../../redux/modal";
+import { useNavigate } from "react-router-dom";
 
 import { BsSearch } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
@@ -11,6 +12,7 @@ import default_img from "../../assets/images/default-img.png";
 export const Navbar = () => {
   const modal = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const openModal = () => {
     dispatch(acOpenMadal());
@@ -18,6 +20,11 @@ export const Navbar = () => {
 
   const closeModal = () => {
     dispatch(acCloseModal());
+  };
+
+  const log_out = () => {
+    localStorage.clear();
+    navigate("/sigin");
   };
 
   return (
@@ -43,7 +50,7 @@ export const Navbar = () => {
           <li>Manzillarim</li>
           <li>Buyurtlarim</li>
           <li>Bildirishnomalar</li>
-          <li>Chiqish</li>
+          <li onClick={log_out}>Chiqish</li>
         </ul>
       </div>
     </div>
