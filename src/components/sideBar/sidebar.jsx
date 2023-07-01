@@ -23,6 +23,8 @@ export const Sidebar = () => {
     dispatch(acShrink(!acShrink));
   };
 
+
+
   return (
     <div className={isShrinkView ? "shrink" : "sidebar_container"}>
       <Link to="/">{isShrinkView ? "Y" : "Yandex@Eats"}</Link>
@@ -104,8 +106,18 @@ const menu_customer = [
 
 const category = [
   {
-    id: "234567",
+    id: "0765435",
     name: "Add restoraund",
-    path: "/"
-  }
+    path: "/add/restaurant",
+  },
+  {
+    id: "0765435",
+    name: "Restaurant list",
+    path: "/restaurant/list",
+  },
+  {
+    id: "0765435",
+    name: "orders",
+    path: "/orders",
+  },
 ];
