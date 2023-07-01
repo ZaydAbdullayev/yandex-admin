@@ -101,3 +101,11 @@ const menu_customer = [
     icon: <AiFillSetting />,
   },
 ];
+
+const category = [
+  {
+    id: "234567",
+    name: "Add restoraund",
+    path: "/"
+  }
+];
