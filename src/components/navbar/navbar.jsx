@@ -24,7 +24,8 @@ export const Navbar = () => {
 
   const log_out = () => {
     localStorage.clear();
-    navigate("/sigin");
+    navigate("/login");
+    // window.location.reload();
   };
 
   return (
