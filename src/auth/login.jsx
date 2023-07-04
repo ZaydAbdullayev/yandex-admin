@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { acLogin, acLogout } from "../redux/auth";
 import { v4 as uuidv5 } from "uuid";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import axios from "axios";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export const Login = () => {
   };
 
   const sig_in = () => {
-    navigate("/sigin");
+    navigate("/signin");
   };
 
   return (
@@ -53,7 +54,7 @@ export const Login = () => {
 
         <input
           type="text"
-          name="username"
+          name="fullname"
           placeholder="Ism kiritng"
           required
           autoComplete="off"
@@ -97,7 +98,7 @@ export const Login = () => {
   );
 };
 
-export const Sigin = () => {
+export const Signin = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -107,8 +108,25 @@ export const Sigin = () => {
     localStorage.setItem("login", JSON.stringify(loginData));
     const token = uuidv5();
     localStorage.setItem("token", token);
-    navigate("/");
     document.querySelector("#form").reset();
+    navigate("/");
+
+    const config = {
+      url: `https://yandex.sp-school58.uz/register`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: loginData,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const [show, setShow] = useState(true);
@@ -157,8 +175,8 @@ export const Sigin = () => {
             <p>Sotuvchi</p>
           </label>
           <label>
-            <input type="radio" name="role" value="admin" required />
-            <p>Admin</p>
+            <input type="radio" name="role" value="owner" required />
+            <p>owner</p>
           </label>
         </div>
         <button className="log_btn" type="submit">

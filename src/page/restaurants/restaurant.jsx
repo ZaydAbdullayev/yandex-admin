@@ -5,7 +5,6 @@ import axios from "axios";
 import { MdOutlineAddBusiness } from "react-icons/md";
 import { useSnackbar } from "notistack";
 
-const base_url = process.env.REACT_APP_BASE_URL;
 export const Restaurant = () => {
   const [files, setFiles] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
@@ -16,7 +15,7 @@ export const Restaurant = () => {
     const data = Object.fromEntries(formdata.entries());
 
     const config = {
-      url: `${base_url}/add/restaurant`,
+      url: `https://yandex.sp-school58.uz/add/restaurant`,
       method: "post",
       headers: {
         "Content-Type": "multipart/form-data",
@@ -26,7 +25,6 @@ export const Restaurant = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res.response.message);
         const msg = "Restoran muvoffaqiyatli qo'shildi";
         enqueueSnackbar(msg, { variant: "success" });
         e.target.reset();
