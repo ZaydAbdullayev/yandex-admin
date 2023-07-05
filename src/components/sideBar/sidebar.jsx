@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { acShrink } from "../../redux/shrink";
+import { useLocation } from "react-router-dom";
 
 import { MdDashboard } from "react-icons/md";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
@@ -18,12 +19,16 @@ export const Sidebar = () => {
   const login = JSON.parse(localStorage.getItem("login")) || [];
   const isShrinkView = useSelector((state) => state.shrink);
   const dispatch = useDispatch();
+  const [activeCategoryId, setActiveCategoryId] = useState(null);
+  const location = useLocation().pathname;
+
+  const handleCategoryClick = (categoryId) => {
+    setActiveCategoryId(categoryId);
+  };
 
   const handleSidebarView = () => {
     dispatch(acShrink(!acShrink));
   };
-
-
 
   return (
     <div className={isShrinkView ? "shrink" : "sidebar_container"}>
@@ -37,12 +42,43 @@ export const Sidebar = () => {
         </button>
       </div>
       <ul className="menu_box">
-        {login.role === "admin"
+        {login.role === "owner"
           ? menu.map((item) => {
               return (
-                <Link to={item.path} key={item.id}>
-                  <span>{item.icon}</span> <p>{item.name}</p>
-                </Link>
+                <div>
+                  <Link
+                    className={
+                      location === item.path
+                        ? "menu_box_item active_menu"
+                        : "menu_box_item"
+                    }
+                    to={item.path}
+                    key={item.id}
+                    onClick={() => handleCategoryClick(item.id)}
+                  >
+                    <span>{item.icon}</span> <p>{item.name}</p>
+                  </Link>
+                  {item.id === activeCategoryId && (
+                    <ul className="inner_menu">
+                      {category
+                        .filter((cat) => cat.id === activeCategoryId)
+                        .map((catItem) => (
+                          <li key={catItem.path}>
+                            <Link
+                              to={`${item.path}${catItem.path}`}
+                              style={
+                                location === `${item.path}${catItem.path}`
+                                  ? { color: "#17b1ea" }
+                                  : {}
+                              }
+                            >
+                              {catItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
               );
             })
           : menu_customer.map((item) => {
@@ -66,7 +102,7 @@ const menu = [
   },
   {
     id: "0765435",
-    path: "/add/restaurant",
+    path: "/restaurant",
     name: "Restaurants",
     icon: <SiHomeassistantcommunitystore />,
   },
@@ -108,12 +144,12 @@ const category = [
   {
     id: "0765435",
     name: "Add restoraund",
-    path: "/add/restaurant",
+    path: "/add",
   },
   {
     id: "0765435",
     name: "Restaurant list",
-    path: "/restaurant/list",
+    path: "/list",
   },
   {
     id: "0765435",

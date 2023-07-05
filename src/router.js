@@ -14,12 +14,12 @@ export const Router = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signin" element={<Signin />} />
-      {login.role === "admin" ? (
+      {login.role === "owner" ? (
         <Route path="/" element={<Auth />}>
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
-            <Route path="add/restaurant" element={<Restaurant />} />
+            <Route path="restaurant/add" element={<Restaurant />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

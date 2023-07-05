@@ -86,8 +86,8 @@ export const Login = () => {
             <p>Sotuvchi</p>
           </label>
           <label>
-            <input type="radio" name="role" value="admin" required />
-            <p>Admin</p>
+            <input type="radio" name="role" value="owner" required />
+            <p>Owner</p>
           </label>
         </div>
         <button className="log_btn" type="submit">
