@@ -21,12 +21,8 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
-<<<<<<< HEAD
             <Route path="add/product" element={<Addproduct />} />
-            <Route path="add/restaurant" element={<Restaurant />} />
-=======
             <Route path="restaurant/add" element={<Restaurant />} />
->>>>>>> 3d7b5ac497d5737f57ea6903f3f74322a6b68d7a
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>
