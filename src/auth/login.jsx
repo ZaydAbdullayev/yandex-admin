@@ -112,7 +112,6 @@ export const Signin = () => {
     const loginData = Object.fromEntries(formData.entries());
     localStorage.setItem("login", JSON.stringify(loginData));
     document.querySelector("#form").reset();
-    navigate("/");
 
     const config = {
       url: `https://yandex.sp-school58.uz/register`,
@@ -130,6 +129,7 @@ export const Signin = () => {
       .catch((err) => {
         console.log(err);
       });
+      navigate("/");
   };
 
   const [show, setShow] = useState(true);
