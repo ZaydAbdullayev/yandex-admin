@@ -7,6 +7,8 @@ import { Sidebar } from "./components/sideBar/sidebar";
 import { Restaurant } from "./page/restaurants/restaurant";
 import { Login, Signin } from "./auth/login";
 import { Auth } from "./auth/auth";
+import { Addproduct } from "./components/Addproduct/addproduct"
+
 
 export const Router = () => {
   const login = JSON.parse(localStorage.getItem("login")) || [];
@@ -19,6 +21,7 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
+            <Route path="add/product" element={<Addproduct />} />
             <Route path="restaurant/add" element={<Restaurant />} />
             <Route path="*" element={<NotFound />} />
           </Route>
@@ -28,6 +31,7 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
+            <Route path="add/product" element={<Addproduct />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

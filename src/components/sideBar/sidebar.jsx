@@ -100,6 +100,7 @@ export const Sidebar = () => {
                         .filter((cat) => cat.id === activeCategoryId)
                         .map((catItem) => (
                           <li key={catItem.name}>
+                          <li key={catItem.path}>
                             <Link
                               to={`${item.path}${catItem.path}`}
                               style={
@@ -131,6 +132,7 @@ const menu = [
   },
   {
     id: "0765435",
+
     path: "/restaurant",
     name: "Restaurants",
     icon: <SiHomeassistantcommunitystore />,
@@ -138,7 +140,7 @@ const menu = [
   {
     id: "243567",
     path: "/add/product",
-    name: "Add Product",
+    name: "AddProduct",
     icon: <IoIosRestaurant />,
   },
   {
