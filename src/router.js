@@ -5,7 +5,7 @@ import { Home } from "./page/home/home";
 import { Layout } from "./layout/layout";
 import { Sidebar } from "./components/sideBar/sidebar";
 import { Restaurant } from "./page/restaurants/restaurant";
-import { Login, Sigin } from "./auth/login";
+import { Login, Signin } from "./auth/login";
 import { Auth } from "./auth/auth";
 import { Addproduct } from "./components/Addproduct/addproduct"
 
@@ -15,14 +15,18 @@ export const Router = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/sigin" element={<Sigin />} />
-      {login.role === "admin" ? (
+      <Route path="/signin" element={<Signin />} />
+      {login.role === "owner" ? (
         <Route path="/" element={<Auth />}>
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
+<<<<<<< HEAD
             <Route path="add/product" element={<Addproduct />} />
             <Route path="add/restaurant" element={<Restaurant />} />
+=======
+            <Route path="restaurant/add" element={<Restaurant />} />
+>>>>>>> 3d7b5ac497d5737f57ea6903f3f74322a6b68d7a
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

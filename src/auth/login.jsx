@@ -3,8 +3,8 @@ import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { acLogin, acLogout } from "../redux/auth";
-import { v4 as uuidv5 } from "uuid";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import axios from "axios";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -15,23 +15,29 @@ export const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
-    const { username, password, role } = loginData;
-    console.log(loginData);
-    const login = JSON.parse(localStorage.getItem("login")) || [];
 
-    if (
-      username === login.username &&
-      password === login.password &&
-      role === login.role
-    ) {
-      dispatch(acLogin());
-      navigate("/");
-      setErr(false);
-    } else {
-      dispatch(acLogout());
-      setErr(true);
-      document.querySelector("#form").reset();
-    }
+    const config = {
+      url: `https://yandex.sp-school58.uz/login/user`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: loginData,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        dispatch(acLogin());
+        navigate("/");
+        setErr(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(acLogout());
+        setErr(true);
+        document.querySelector("#form").reset();
+      });
   };
 
   const [show, setShow] = useState(true);
@@ -41,7 +47,7 @@ export const Login = () => {
   };
 
   const sig_in = () => {
-    navigate("/sigin");
+    navigate("/signin");
   };
 
   return (
@@ -85,8 +91,8 @@ export const Login = () => {
             <p>Sotuvchi</p>
           </label>
           <label>
-            <input type="radio" name="role" value="admin" required />
-            <p>Admin</p>
+            <input type="radio" name="role" value="owner" required />
+            <p>Owner</p>
           </label>
         </div>
         <button className="log_btn" type="submit">
@@ -97,7 +103,7 @@ export const Login = () => {
   );
 };
 
-export const Sigin = () => {
+export const Signin = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -105,10 +111,25 @@ export const Sigin = () => {
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
     localStorage.setItem("login", JSON.stringify(loginData));
-    const token = uuidv5();
-    localStorage.setItem("token", token);
-    navigate("/");
     document.querySelector("#form").reset();
+    navigate("/");
+
+    const config = {
+      url: `https://yandex.sp-school58.uz/register`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: loginData,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const [show, setShow] = useState(true);
@@ -157,8 +178,8 @@ export const Sigin = () => {
             <p>Sotuvchi</p>
           </label>
           <label>
-            <input type="radio" name="role" value="admin" required />
-            <p>Admin</p>
+            <input type="radio" name="role" value="owner" required />
+            <p>Owner</p>
           </label>
         </div>
         <button className="log_btn" type="submit">
