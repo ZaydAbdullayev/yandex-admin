@@ -15,7 +15,7 @@
 }
 
 .add_img {
-    width: 100%;
+    width: 700px;
     height: 320px;
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@
     color: #17b1ed;
 }
 
-.add_reastaurant>input {
+.add_reastaurant > input {
     width: calc(50% - 15px);
     height: 50Px;
     padding: 0 2%;
@@ -51,7 +51,7 @@
     text-align: center;
 }
 
-.add_reastaurant>input[type="submit"] {
+.add_reastaurant > input[type="submit"] {
     cursor: pointer;
     background: #17b1ed;
     color: #333;
@@ -63,6 +63,7 @@
 
 .add_reastaurant>input::placeholder {
     color: #17b2ea4f;
+    width: 100%;
 }
 
 .selected_image {

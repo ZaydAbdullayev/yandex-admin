@@ -45,7 +45,7 @@ export const Sidebar = () => {
         {login.role === "owner"
           ? menu.map((item) => {
               return (
-                <div>
+                <div key={item.id}>
                   <Link
                     className={
                       location === item.path
@@ -53,7 +53,6 @@ export const Sidebar = () => {
                         : "menu_box_item"
                     }
                     to={item.path}
-                    key={item.id}
                     onClick={() => handleCategoryClick(item.id)}
                   >
                     <span>{item.icon}</span> <p>{item.name}</p>
@@ -83,9 +82,39 @@ export const Sidebar = () => {
             })
           : menu_customer.map((item) => {
               return (
-                <Link to={item.path} key={item.id}>
-                  <span>{item.icon}</span> <p>{item.name}</p>
-                </Link>
+                <div key={item.id}>
+                  <Link
+                    className={
+                      location === item.path
+                        ? "menu_box_item active_menu"
+                        : "menu_box_item"
+                    }
+                    to={item.path}
+                    onClick={() => handleCategoryClick(item.id)}
+                  >
+                    <span>{item.icon}</span> <p>{item.name}</p>
+                  </Link>
+                  {item.id === activeCategoryId && (
+                    <ul className="inner_menu">
+                      {category
+                        .filter((cat) => cat.id === activeCategoryId)
+                        .map((catItem) => (
+                          <li key={catItem.path}>
+                            <Link
+                              to={`${item.path}${catItem.path}`}
+                              style={
+                                location === `${item.path}${catItem.path}`
+                                  ? { color: "#17b1ea" }
+                                  : {}
+                              }
+                            >
+                              {catItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
               );
             })}
       </ul>
@@ -102,6 +131,7 @@ const menu = [
   },
   {
     id: "0765435",
+
     path: "/restaurant",
     name: "Restaurants",
     icon: <SiHomeassistantcommunitystore />,
@@ -109,7 +139,7 @@ const menu = [
   {
     id: "243567",
     path: "/add/product",
-    name: "Add Product",
+    name: "AddProduct",
     icon: <IoIosRestaurant />,
   },
   {
