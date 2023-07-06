@@ -3,7 +3,6 @@ import "./sidebar.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { acShrink } from "../../redux/shrink";
-
 import { MdDashboard } from "react-icons/md";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { IoIosRestaurant } from "react-icons/io";
@@ -64,14 +63,14 @@ const menu = [
   },
   {
     id: "0765435",
-    path: "/add/restaurant",
+    path: "add/restaurant",
     name: "Restaurants",
     icon: <SiHomeassistantcommunitystore />,
   },
   {
     id: "243567",
     path: "/add/product",
-    name: "Add Product",
+    name: "AddProduct",
     icon: <IoIosRestaurant />,
   },
   {
