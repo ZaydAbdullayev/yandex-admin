@@ -3,7 +3,6 @@ import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { acLogin, acLogout } from "../redux/auth";
-import { v4 as uuidv5 } from "uuid";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import axios from "axios";
 
@@ -16,23 +15,29 @@ export const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
-    const { username, password, role } = loginData;
-    console.log(loginData);
-    const login = JSON.parse(localStorage.getItem("login")) || [];
 
-    if (
-      username === login.username &&
-      password === login.password &&
-      role === login.role
-    ) {
-      dispatch(acLogin());
-      navigate("/");
-      setErr(false);
-    } else {
-      dispatch(acLogout());
-      setErr(true);
-      document.querySelector("#form").reset();
-    }
+    const config = {
+      url: `https://yandex.sp-school58.uz/login/user`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: loginData,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        dispatch(acLogin());
+        navigate("/");
+        setErr(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(acLogout());
+        setErr(true);
+        document.querySelector("#form").reset();
+      });
   };
 
   const [show, setShow] = useState(true);
@@ -54,7 +59,7 @@ export const Login = () => {
 
         <input
           type="text"
-          name="fullname"
+          name="username"
           placeholder="Ism kiritng"
           required
           autoComplete="off"
@@ -106,8 +111,6 @@ export const Signin = () => {
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
     localStorage.setItem("login", JSON.stringify(loginData));
-    const token = uuidv5();
-    localStorage.setItem("token", token);
     document.querySelector("#form").reset();
     navigate("/");
 
@@ -176,7 +179,7 @@ export const Signin = () => {
           </label>
           <label>
             <input type="radio" name="role" value="owner" required />
-            <p>owner</p>
+            <p>Owner</p>
           </label>
         </div>
         <button className="log_btn" type="submit">
