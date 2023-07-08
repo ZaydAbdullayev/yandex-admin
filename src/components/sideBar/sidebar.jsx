@@ -9,11 +9,8 @@ import { MdDashboard } from "react-icons/md";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { IoIosRestaurant } from "react-icons/io";
 import { AiFillSetting } from "react-icons/ai";
-import { HiChevronRight } from "react-icons/hi";
-import { HiChevronLeft } from "react-icons/hi";
-import { RiMenu2Line } from "react-icons/ri";
-// import { RiArrowDownSLine } from "react-icons/ri";
-// import { RiArrowUpSLine } from "react-icons/ri";
+import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
+import { RiMenu2Line, RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
 export const Sidebar = () => {
   const login = JSON.parse(localStorage.getItem("login")) || [];
@@ -23,7 +20,9 @@ export const Sidebar = () => {
   const location = useLocation().pathname;
 
   const handleCategoryClick = (categoryId) => {
-    setActiveCategoryId(categoryId);
+    setActiveCategoryId((prevCategoryId) =>
+      prevCategoryId === categoryId ? null : categoryId
+    );
   };
 
   const handleSidebarView = () => {
@@ -55,14 +54,21 @@ export const Sidebar = () => {
                     to={item.path}
                     onClick={() => handleCategoryClick(item.id)}
                   >
-                    <span>{item.icon}</span> <p>{item.name}</p>
+                    <span>{item.icon}</span> <p>{item.name}</p>{" "}
+                    <i>
+                      {activeCategoryId === item.id ? (
+                        <RiArrowDownSLine />
+                      ) : (
+                        <RiArrowUpSLine />
+                      )}
+                    </i>
                   </Link>
                   {item.id === activeCategoryId && (
                     <ul className="inner_menu">
                       {category
                         .filter((cat) => cat.id === activeCategoryId)
                         .map((catItem) => (
-                          <li key={catItem.name}>
+                          <li key={catItem.path}>
                             <Link
                               to={`${item.path}${catItem.path}`}
                               style={
@@ -92,14 +98,13 @@ export const Sidebar = () => {
                     to={item.path}
                     onClick={() => handleCategoryClick(item.id)}
                   >
-                    <span>{item.icon}</span> <p>{item.name}</p>
+                    <span>{item.icon}</span> <p>{item.name}</p> <i></i>
                   </Link>
                   {item.id === activeCategoryId && (
                     <ul className="inner_menu">
                       {category
                         .filter((cat) => cat.id === activeCategoryId)
                         .map((catItem) => (
-                          <li key={catItem.name}>
                           <li key={catItem.path}>
                             <Link
                               to={`${item.path}${catItem.path}`}
@@ -132,7 +137,6 @@ const menu = [
   },
   {
     id: "0765435",
-
     path: "/restaurant",
     name: "Restaurants",
     icon: <SiHomeassistantcommunitystore />,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./restaurant.css";
-import axios from "axios";
+import { ClearForm } from "../../service/form.service";
+import { ApiService } from "../../service/api.service";
 
 import { MdOutlineAddBusiness } from "react-icons/md";
 import { useSnackbar } from "notistack";
@@ -14,26 +15,18 @@ export const Restaurant = () => {
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
 
-    const config = {
-      url: `https://yandex.sp-school58.uz/add/restaurant`,
-      method: "post",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-
-      data: data,
-    };
-    axios(config)
+    ApiService.fetching("add/restaurant", data)
       .then((res) => {
         const msg = "Restoran muvoffaqiyatli qo'shildi";
         enqueueSnackbar(msg, { variant: "success" });
-        e.target.reset();
+        ClearForm(".add_reastaurant");
+        setFiles([]);
       })
       .catch((err) => {
         const msg = "Restoran qo'shishda qandaydir xatolik yuz berdi";
         enqueueSnackbar(msg, { variant: "error" });
         console.log(err);
-        e.target.reset();
+        ClearForm(".add_reastaurant");
       });
   };
 
