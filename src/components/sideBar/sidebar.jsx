@@ -192,7 +192,7 @@ const menu_customer = [
 const category = [
   {
     id: "0765435",
-    name: "Add restoraund",
+    name: "Add restaurant",
     path: "/add",
   },
   {
