@@ -20,7 +20,7 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
-            <Route path="add/product" element={<Addproduct />} />
+            <Route path="product/add" element={<Addproduct />} />
             <Route path="restaurant/add" element={<Restaurant />} />
             <Route path="*" element={<NotFound />} />
           </Route>
@@ -30,7 +30,7 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
-            <Route path="add/product" element={<Addproduct />} />
+            <Route path="product/add" element={<Addproduct />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

@@ -17,7 +17,7 @@ export const Login = () => {
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
 
-    ApiService.fetching("login/user", loginData)
+    ApiService.fetching("login/admin", loginData)
       .then((res) => {
         console.log(res);
         const user = res.data.innerData.user;
@@ -105,7 +105,7 @@ export const Signin = () => {
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
 
-    ApiService.fetching("register", loginData)
+    ApiService.fetching("register/admin", loginData)
       .then((res) => {
         console.log(res);
         const user = res.data.innerData.user;

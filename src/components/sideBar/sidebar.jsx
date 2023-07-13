@@ -152,8 +152,8 @@ const menu = [
   },
   {
     id: "243567",
-    path: "/add/product",
-    name: "AddProduct",
+    path: "/product",
+    name: "Products",
     icon: <IoIosRestaurant />,
     list: true,
   },
@@ -175,8 +175,8 @@ const menu_customer = [
   },
   {
     id: "243567",
-    path: "/add/product",
-    name: "Add Product",
+    path: "/product",
+    name: "Products",
     icon: <IoIosRestaurant />,
     list: true,
   },
@@ -192,16 +192,31 @@ const menu_customer = [
 const category = [
   {
     id: "0765435",
+    name: "Restaurant list",
+    path: "",
+  },
+  {
+    id: "0765435",
     name: "Add restaurant",
     path: "/add",
   },
   {
     id: "0765435",
-    name: "Restaurant list",
-    path: "/list",
+    name: "orders",
+    path: "/orders",
   },
   {
-    id: "0765435",
+    id: "243567",
+    name: "Product list",
+    path: "",
+  },
+  {
+    id: "243567",
+    name: "Add product",
+    path: "/add",
+  },
+  {
+    id: "243567",
     name: "orders",
     path: "/orders",
   },

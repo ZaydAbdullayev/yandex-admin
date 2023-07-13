@@ -70,12 +70,19 @@ export const Restaurant = () => {
             <p>gacha</p>
           </label>
         </div>
-        <input
-          type="text"
-          name="review_count"
-          placeholder="Sharhlar soni"
-          required
-        />
+        <div className="delivery_time">
+          <p>Qo'shilayotgan makonning turi</p>
+          <div>
+            <label>
+              <p>Restaurant</p>
+              <input type="radio" name="type" value="Restaurant" required />
+            </label>
+            <label>
+              <p>Shop</p>
+              <input type="radio" name="type" value="Shop" required />
+            </label>
+          </div>
+        </div>
         <input
           type="text"
           name="rating"
@@ -83,6 +90,19 @@ export const Restaurant = () => {
           required
         />
         <input type="submit" value="Qo'shish" />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Necessitatibus perspiciatis quia quidem aperiam magnam earum deserunt
+          dicta. Nulla dicta, minus nemo ipsam, harum commodi atque corporis
+          iure ratione nostrum libero voluptates, blanditiis neque officia!
+          Eaque neque non temporibus repellat fuga, quisquam mollitia possimus
+          suscipit earum veritatis iure nesciunt laboriosam architecto fugiat
+          rem quam autem debitis ipsum quo magni explicabo excepturi nihil nobis
+          odit. Praesentium ipsa quisquam ex repellat harum odit, numquam id
+          voluptates. At, sunt? Nemo reprehenderit nobis asperiores qui ut
+          dolore soluta cumque enim? Atque exercitationem corporis ut
+          accusantium, cum quam aut sequi, veritatis eum, illo ab odit officia.
+        </p>
       </form>
     </div>
   );

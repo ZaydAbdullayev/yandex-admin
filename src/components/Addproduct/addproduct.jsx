@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./addproduct.css";
-import { MdAllInbox } from "react-icons/md";
+import { IoIosRestaurant } from "react-icons/io";
 import { useSnackbar } from "notistack";
 import { ClearForm } from "../../service/form.service";
 import { ApiService } from "../../service/api.service";
+import { NumericFormat } from "react-number-format";
 
 export const Addproduct = () => {
   const [files, setFiles] = useState([]);
@@ -44,7 +45,7 @@ export const Addproduct = () => {
             style={files.length ? { border: "none" } : {}}
             className="product_img"
           >
-            {files.length ? "" : <MdAllInbox />}
+            {files.length ? "" : <IoIosRestaurant />}
             <input
               type="file"
               name="img"
@@ -65,10 +66,12 @@ export const Addproduct = () => {
             placeholder="Maxsulot nomini kiriting"
             required
           />
-          <input
-            type="number"
-            name="price"
+          <NumericFormat
             placeholder="Maxsulot narxini kiriting"
+            suffix=" sum"
+            thousandSeparator=" "
+            displayType="input"
+            name="price"
             required
           />
           <input
