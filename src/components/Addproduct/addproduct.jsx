@@ -15,6 +15,8 @@ export const Addproduct = () => {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
+    data.price = data?.price?.split(" ").join("");
+    console.log(data);
 
     ApiService.fetching("add/product", data)
       .then((res) => {
@@ -70,6 +72,7 @@ export const Addproduct = () => {
             placeholder="Maxsulot narxini kiriting"
             suffix=" sum"
             thousandSeparator=" "
+            allowLeadingZeros
             displayType="input"
             name="price"
             required
@@ -78,6 +81,11 @@ export const Addproduct = () => {
             type="text"
             name="description"
             placeholder="Maxsulot haqida tavsif"
+          />
+          <input
+            type="text"
+            name="category"
+            placeholder="Maxsulot turini kiriting"
             required
           />
           <input
