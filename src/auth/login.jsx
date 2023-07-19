@@ -16,6 +16,12 @@ export const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
+    loginData.username = loginData?.username
+      ?.toLowerCase()
+      ?.split(" ")
+      .join("_");
+
+    console.log(loginData);
 
     ApiService.fetching("login/admin", loginData)
       .then((res) => {
@@ -81,7 +87,7 @@ export const Login = () => {
         <div className="role">
           <p style={err ? { color: "tomato" } : {}}>Boshqaruvchi:</p>
           <label>
-            <input type="radio" name="role" value="customer" required />
+            <input type="radio" name="role" value="restaurant" required />
             <p>Sotuvchi</p>
           </label>
           <label>
@@ -104,6 +110,12 @@ export const Signin = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
+    loginData.username = loginData?.username
+      ?.toLowerCase()
+      ?.split(" ")
+      .join("_");
+
+    console.log(loginData);
 
     ApiService.fetching("register/admin", loginData)
       .then((res) => {
@@ -160,7 +172,7 @@ export const Signin = () => {
         <div className="role">
           <p>Boshqaruvchi:</p>
           <label>
-            <input type="radio" name="role" value="customer" required />
+            <input type="radio" name="role" value="restaurant" required />
             <p>Sotuvchi</p>
           </label>
           <label>

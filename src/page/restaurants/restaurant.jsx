@@ -14,6 +14,9 @@ export const Restaurant = () => {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
+    data.name = data?.name?.toLowerCase()?.split(" ").join("_");
+
+    console.log(data.name);
 
     ApiService.fetching("add/restaurant", data)
       .then((res) => {

@@ -14,6 +14,7 @@ export const Navbar = () => {
   const modal = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const name = user?.user?.username.split("_").join(" ");
 
   const openModal = () => {
     dispatch(acOpenMadal());
@@ -24,7 +25,7 @@ export const Navbar = () => {
   };
 
   const log_out = () => {
-    localStorage.clear();
+    localStorage.clear("user");
     navigate("/login");
   };
 
@@ -38,9 +39,12 @@ export const Navbar = () => {
         <FaBell />
         <img src={default_img} alt="user_photo" onClick={openModal} />
       </div>
-      <div className={modal ? "modal_box" : "modal_box close_modal"}>
+      <div
+        className={modal ? "modal_box" : "modal_box close_modal"}
+        onMouseLeave={closeModal}
+      >
         <div className="user">
-          <b>{user?.user?.username}</b>
+          <b style={{ textTransform: "uppercase" }}>{name}</b>
           <figure>
             <img src={default_img} alt="user_photo" />
             <button onClick={closeModal}>x</button>

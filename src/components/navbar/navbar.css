@@ -61,7 +61,7 @@
 /* ===================== Style of modal ===================== */
 .modal_box {
     position: fixed;
-    right: 1.5%;
+    right: 15px;
     top: 1.5%;
     max-width: 400px;
     width: 100%;
@@ -73,7 +73,7 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     gap: 10px;
     transition: all 0.5s ease;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .close_modal {

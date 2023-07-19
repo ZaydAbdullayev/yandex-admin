@@ -91,7 +91,7 @@ export const Addproduct = () => {
           <input
             type="hidden"
             name="restaurant"
-            defaultValue={user.user.username}
+            defaultValue={user?.user?.id}
           />
           <input type="submit" value="Qo'shish" />
         </div>
