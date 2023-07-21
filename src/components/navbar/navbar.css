@@ -46,7 +46,8 @@
 }
 
 .profile>img {
-    width: 50px;
+    width: 60px;
+    height: 60px;
     cursor: pointer;
 }
 
@@ -54,8 +55,6 @@
 .user>figure>img {
     object-fit: cover;
     border-radius: 50%;
-    filter: invert(200%) sepia(50%) saturate(1564%) hue-rotate(159deg) brightness(300%) contrast(51%);
-    border: 1px solid #22343a;
 }
 
 /* ===================== Style of modal ===================== */
@@ -102,6 +101,7 @@
 
 .user>figure>img {
     width: 35px;
+    height: 35px;
 }
 
 .user>figure>button {

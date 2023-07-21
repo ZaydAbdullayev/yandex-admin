@@ -37,7 +37,11 @@ export const Navbar = () => {
       </form>
       <div className="profile">
         <FaBell />
-        <img src={default_img} alt="user_photo" onClick={openModal} />
+        <img
+          src={user?.user?.img || default_img}
+          alt="user_photo"
+          onClick={openModal}
+        />
       </div>
       <div
         className={modal ? "modal_box" : "modal_box close_modal"}
@@ -46,7 +50,7 @@ export const Navbar = () => {
         <div className="user">
           <b>{name}</b>
           <figure>
-            <img src={default_img} alt="user_photo" />
+            <img src={user?.user?.img || default_img} alt="user_photo" />
             <button onClick={closeModal}>x</button>
           </figure>
         </div>
