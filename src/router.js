@@ -5,7 +5,7 @@ import { Home } from "./page/home/home";
 import { Layout } from "./layout/layout";
 import { Sidebar } from "./components/sideBar/sidebar";
 import { Restaurant } from "./page/restaurants/restaurant";
-import { Login, Signin } from "./auth/login";
+import { Login } from "./auth/login";
 import { Auth } from "./auth/auth";
 import { Addproduct } from "./components/Addproduct/addproduct";
 
@@ -14,7 +14,6 @@ export const Router = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/signin" element={<Signin />} />
       {login?.user?.role === "owner" ? (
         <Route path="/" element={<Auth />}>
           <Route path="/" element={<Layout />}>

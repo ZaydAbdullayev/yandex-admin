@@ -16,10 +16,7 @@ export const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
-    loginData.username = loginData?.username
-      ?.toLowerCase()
-      ?.split(" ")
-      .join("_");
+    loginData.username = loginData?.username?.split(" ").join("_");
 
     console.log(loginData);
 
@@ -46,16 +43,10 @@ export const Login = () => {
     setShow(!show);
   };
 
-  const sig_in = () => {
-    navigate("/signin");
-  };
-
   return (
     <div className="login">
       <form onSubmit={handleSubmit} id="form">
-        <h1>
-          Hisobga kirish <span onClick={sig_in}>/ Ro'yxatdan o'tish</span>
-        </h1>
+        <h1>Hisobga kirish</h1>
 
         <input
           type="text"
@@ -88,92 +79,7 @@ export const Login = () => {
           <p style={err ? { color: "tomato" } : {}}>Boshqaruvchi:</p>
           <label>
             <input type="radio" name="role" value="restaurant" required />
-            <p>Sotuvchi</p>
-          </label>
-          <label>
-            <input type="radio" name="role" value="owner" required />
-            <p>Owner</p>
-          </label>
-        </div>
-        <button className="log_btn" type="submit">
-          Log In
-        </button>
-      </form>
-    </div>
-  );
-};
-
-export const Signin = () => {
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const loginData = Object.fromEntries(formData.entries());
-    loginData.username = loginData?.username
-      ?.toLowerCase()
-      ?.split(" ")
-      .join("_");
-
-    console.log(loginData);
-
-    ApiService.fetching("register/admin", loginData)
-      .then((res) => {
-        console.log(res);
-        const user = res.data.innerData.user;
-        localStorage.setItem("user", JSON.stringify(user));
-        ClearForm("#form");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    navigate("/");
-  };
-
-  const [show, setShow] = useState(true);
-
-  const handleShow = () => {
-    setShow(!show);
-  };
-
-  const log_in = () => {
-    navigate("/login");
-  };
-
-  return (
-    <div className="login">
-      <form onSubmit={handleSubmit} id="form">
-        <h1>
-          Ro'yxatdan o'tish <span onClick={log_in}>/ Hisobga kirish</span>
-        </h1>
-
-        <input
-          type="text"
-          name="username"
-          placeholder="Ism kiritng"
-          required
-          autoComplete="off"
-          autoCapitalize="off"
-          className="input"
-        />
-        <label>
-          <input
-            type={show ? "password" : "text"}
-            name="password"
-            placeholder="Parol kiriting"
-            required
-            autoComplete="off"
-            className="input"
-          />
-          <span onClick={handleShow} style={show ? {} : { color: "orange" }}>
-            {show ? <BsEyeSlash /> : <BsEye />}
-          </span>
-        </label>
-        <div className="role">
-          <p>Boshqaruvchi:</p>
-          <label>
-            <input type="radio" name="role" value="restaurant" required />
-            <p>Sotuvchi</p>
+            <p>Restaurant</p>
           </label>
           <label>
             <input type="radio" name="role" value="owner" required />
