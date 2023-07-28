@@ -9,6 +9,7 @@ import {
 import { NumericFormat } from "react-number-format";
 import { useSelector, useDispatch } from "react-redux";
 import { acUpload } from "../../redux/upload";
+import Skeleton from "react-loading-skeleton";
 
 import { GoSearch } from "react-icons/go";
 import { AiFillDelete } from "react-icons/ai";
@@ -99,9 +100,9 @@ export const Products = () => {
       </div>
       <div className="search_src">
         <Link to={pathname}>All</Link>
-        {uniqueCategories?.map((group) => (
-          <Link to={`?q/gr=${encodeURIComponent(group)}`} key={group}>
-            {group}
+        {uniqueCategories?.map((category) => (
+          <Link to={`?q/gr=${encodeURIComponent(category)}`} key={category}>
+            {category}
           </Link>
         ))}
       </div>
@@ -114,7 +115,9 @@ export const Products = () => {
               <input
                 type="file"
                 accept="image/*"
-                // onChange={(e) => handleUploadImg(e.target.files[0])}
+                onChange={(e) =>
+                  handleUpdate({ id: product.id, img: e.target.files[0] })
+                }
               />
               <img src={product?.img} alt="foto" />
             </label>

@@ -138,7 +138,7 @@
     font-size: var(--fs7);
     background: #00000090;
     transition: all 0.4s ease;
-    cursor: wait;
+    cursor: pointer;
 }
 
 .img_box:hover span {
