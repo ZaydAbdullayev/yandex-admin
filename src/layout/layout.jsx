@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/sideBar/sidebar";
 import { useSelector } from "react-redux";
 import { Navbar } from "../components/navbar/navbar";
-
 export const Layout = () => {
   const shrinkMod = useSelector((state) => state.shrink);
 

@@ -8,6 +8,7 @@ import { Restaurant } from "./page/restaurants/restaurant";
 import { Login } from "./auth/login";
 import { Auth } from "./auth/auth";
 import { Addproduct } from "./components/Addproduct/addproduct";
+import { Products } from "./page/products/products";
 
 export const Router = () => {
   const login = JSON.parse(localStorage.getItem("user")) || [];
@@ -29,6 +30,7 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="dashboard" element={<Home />} />
+            <Route path="product" element={<Products />} />
             <Route path="product/add" element={<Addproduct />} />
             <Route path="*" element={<NotFound />} />
           </Route>

@@ -17,3 +17,24 @@ export const ApiService = {
     return response;
   },
 };
+
+export const ApiGetService = {
+  async fetching(url) {
+    const response = await axios.get(`${base_url}/${url}`);
+    return response;
+  },
+};
+
+export const ApiUpdateService = {
+  async fetching(url, data) {
+    const response = await axios.patch(`${base_url}/${url}`, data, config);
+    return response;
+  },
+};
+
+export const ApiDeleteService = {
+  async fetching(url) {
+    const response = await axios.delete(`${base_url}/${url}`);
+    return response;
+  },
+};
