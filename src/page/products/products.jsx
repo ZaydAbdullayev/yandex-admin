@@ -58,6 +58,14 @@ export const Products = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleDelete = (id) => {
+    ApiDeleteService.fetching(`remove/product/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const filteredProducts = products?.filter((product) => {
     const categoryMatches =
       category === "" ||
