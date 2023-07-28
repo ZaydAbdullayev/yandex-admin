@@ -13,18 +13,7 @@ import { acUpload } from "../../redux/upload";
 import { GoSearch } from "react-icons/go";
 import { AiFillDelete } from "react-icons/ai";
 import { FaPen, FaCheck } from "react-icons/fa";
-
-const categorys = [
-  "ichimliklar",
-  "shashliklar",
-  "lavashlar",
-  "fast food",
-  "palov",
-  "bishteks",
-  "steyklar",
-  "gamburgerlar",
-  "hot doglar",
-];
+import { ImCancelCircle } from "react-icons/im";
 
 export const Products = () => {
   const user_id = JSON.parse(localStorage.getItem("user"))?.user?.id;
@@ -32,10 +21,9 @@ export const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState(null);
   const [update, setUpdate] = useState(false);
+  const [info, setInfo] = useState({});
   const upload = useSelector((state) => state.upload);
   const dispatch = useDispatch();
-
-  console.log(products);
 
   useEffect(() => {
     ApiGetService.fetching(`get/products/${user_id}`)
@@ -45,11 +33,30 @@ export const Products = () => {
       .catch((err) => console.log(err));
   }, [user_id, upload]);
 
+  const getUniqueCategories = () => {
+    const uniqueCategories = new Set();
+    products?.forEach((item) => {
+      uniqueCategories.add(item.category);
+    });
+    return Array.from(uniqueCategories);
+  };
+
+  const uniqueCategories = getUniqueCategories();
+  const category = (search && decodeURIComponent(search.split("=")[1])) || "";
+
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const category = (search && decodeURIComponent(search.split("=")[1])) || "";
+  const handleUpdate = (product) => {
+    ApiUpdateService.fetching(`update/product/${product.id}`, product)
+      .then((res) => {
+        dispatch(acUpload());
+        setInfo({});
+        setUpdate(false);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const filteredProducts = products?.filter((product) => {
     const categoryMatches =
@@ -61,13 +68,8 @@ export const Products = () => {
     return categoryMatches && nameMatches;
   });
 
-  const handleUpdate = (product) => {
-    ApiUpdateService.fetching(`update/product/${product.id}`, product)
-      .then((res) => {
-        console.log(res);
-        dispatch(acUpload());
-      })
-      .catch((err) => console.log(err));
+  const handleInfoChange = (key, value) => {
+    setInfo((prevInfo) => ({ ...prevInfo, [key]: value }));
   };
 
   return (
@@ -89,7 +91,7 @@ export const Products = () => {
       </div>
       <div className="search_src">
         <Link to={pathname}>All</Link>
-        {categorys.map((group) => (
+        {uniqueCategories?.map((group) => (
           <Link to={`?q/gr=${encodeURIComponent(group)}`} key={group}>
             {group}
           </Link>
@@ -100,6 +102,7 @@ export const Products = () => {
         {filteredProducts?.map((product) => (
           <div className="item" key={product.id}>
             <label className="img_box">
+              <span className="upload_img">Mahsulot rasmini o'zgartirish</span>
               <input
                 type="file"
                 accept="image/*"
@@ -107,13 +110,39 @@ export const Products = () => {
               />
               <img src={product?.img} alt="foto" />
             </label>
-            <p style={{ textTransform: "capitalize" }}>{product.name}</p>
-            <p style={{ flex: "1" }}>{product.description}</p>
+            {update === product?.id ? (
+              <>
+                <input
+                  type="text"
+                  defaultValue={product.name}
+                  style={{ textTransform: "capitalize" }}
+                  autoFocus
+                  onChange={(e) => handleInfoChange("name", e.target.value)}
+                />
+                <input
+                  type="text"
+                  defaultValue={product.description}
+                  style={{ flex: "1" }}
+                  onChange={(e) =>
+                    handleInfoChange("description", e.target.value)
+                  }
+                />
+              </>
+            ) : (
+              <>
+                <p>{product.name}</p>
+                <p style={{ flex: "1" }}>{product.description}</p>
+              </>
+            )}
+
             <NumericFormat
-              displayType="text"
-              value={product.price}
+              displayType={update === product?.id ? "input" : "text"}
+              defaultValue={product.price}
               thousandSeparator=" "
               suffix=" so'm"
+              onChange={(e) =>
+                handleInfoChange("price", e.target.value.split(" ").join(""))
+              }
             />
             <div className="status">
               <span
@@ -137,16 +166,18 @@ export const Products = () => {
                 passive
               </span>
             </div>
-            <button
-              style={{
-                fontSize: "var(--fs5)",
-                color: "#33ff09",
-              }}
-            >
+            <button className="update_btn">
               {update === product?.id ? (
-                <span>
-                  <FaCheck />
-                </span>
+                <>
+                  <span
+                    onClick={() => handleUpdate({ ...info, id: product.id })}
+                  >
+                    <FaCheck />
+                  </span>{" "}
+                  <span onClick={() => setUpdate(false)}>
+                    <ImCancelCircle />
+                  </span>
+                </>
               ) : (
                 <span onClick={() => setUpdate(product.id)}>
                   <FaPen />

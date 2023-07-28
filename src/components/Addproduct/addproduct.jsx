@@ -5,31 +5,31 @@ import { useSnackbar } from "notistack";
 import { ClearForm } from "../../service/form.service";
 import { ApiService } from "../../service/api.service";
 import { NumericFormat } from "react-number-format";
+import { useNavigate } from "react-router-dom";
 
 export const Addproduct = () => {
+  const user = JSON.parse(localStorage.getItem("user") || []);
   const [files, setFiles] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
-  const user = JSON.parse(localStorage.getItem("user") || []);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata.entries());
     data.price = data?.price?.split(" ").join("");
-    console.log(data);
 
     ApiService.fetching("add/product", data)
       .then((res) => {
-        console.log(res);
-        const msg = "Maxsulot muaffaqiyatli qoshildi";
+        const msg = "Maxsulot muaffaqiyatli qo'shildi";
         enqueueSnackbar(msg, { variant: "success" });
         ClearForm(".add_product");
         setFiles([]);
+        navigate("/product");
       })
       .catch((err) => {
-        const msg = "Maxsulot qoshishda xatolik yuz berdi ";
+        const msg = "Maxsulot qo'shishda xatolik yuz berdi ";
         enqueueSnackbar(msg, { variant: "error" });
-        console.log(err);
       });
   };
 
