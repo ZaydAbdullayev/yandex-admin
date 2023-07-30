@@ -9,7 +9,6 @@ import {
 import { NumericFormat } from "react-number-format";
 import { useSelector, useDispatch } from "react-redux";
 import { acUpload } from "../../redux/upload";
-import Skeleton from "react-loading-skeleton";
 
 import { GoSearch } from "react-icons/go";
 import { AiFillDelete } from "react-icons/ai";
@@ -60,9 +59,9 @@ export const Products = () => {
   };
 
   const handleDelete = (id) => {
-    ApiDeleteService.fetching(`remove/product/${id}`)
+    ApiDeleteService.fetching(`delete/product/${id}`)
       .then((res) => {
-        console.log(res);
+        dispatch(acUpload());
       })
       .catch((err) => console.log(err));
   };
@@ -141,7 +140,7 @@ export const Products = () => {
               </>
             ) : (
               <>
-                <p>{product.name}</p>
+                <p className="name">{product.name}</p>
                 <p style={{ flex: "1" }}>{product.description}</p>
               </>
             )}
@@ -195,7 +194,10 @@ export const Products = () => {
                 </span>
               )}
             </button>
-            <button style={{ fontSize: "var(--fs4)", color: "#d82a0c" }}>
+            <button
+              style={{ fontSize: "var(--fs4)", color: "#d82a0c" }}
+              onClick={() => handleDelete(product.id)}
+            >
               <AiFillDelete />
             </button>
           </div>
