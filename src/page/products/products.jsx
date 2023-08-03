@@ -40,7 +40,7 @@ export const Products = () => {
     });
     return Array.from(uniqueCategories);
   };
-
+ 
   const uniqueCategories = getUniqueCategories();
   const category = (search && decodeURIComponent(search.split("=")[1])) || "";
 

@@ -9,7 +9,7 @@ export const store = configureStore({
     shrink: reShrink,
     auth: reAuth,
     modal: reModal,
-    upload: reUpload
+    upload: reUpload,
   }),
   devTools: process.env.NODE_ENV !== "production",
 });
