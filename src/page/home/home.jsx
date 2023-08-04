@@ -15,11 +15,13 @@ export const Home = () => {
   const newOrder = useSelector((state) => state.upload);
 
   useEffect(() => {
-    ApiGetService.fetching(`get/orders/${id}`)
-      .then((res) => {
-        setOrders(res?.data?.innerData);
-      })
-      .catch((err) => console.log(err));
+    setTimeout(() => {
+      ApiGetService.fetching(`get/orders/${id}`)
+        .then((res) => {
+          setOrders(res?.data?.innerData);
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
   }, [id, newOrder]);
 
   // to find oreder stution
@@ -35,11 +37,11 @@ export const Home = () => {
 
   // to accept order's product by id
   const orderAccept = (order) => {
-    setStution(order.order_id);
     ApiUpdateService.fetching(`update/status/${order.order_id}`, {
       status: order.status,
     })
       .then((res) => {
+        setStution(order.order_id);
         dispatch(acUpload());
       })
       .catch((err) => console.log(err));
@@ -103,7 +105,7 @@ export const Home = () => {
                           <p style={{ textTransform: "capitalize" }}>
                             {product?.name}
                           </p>
-                          <p>{product?.describtion}</p>
+                          <p>{product?.description}</p>
                         </pre>
                         <p>{product?.quantity} ta</p>
                         <span>{product?.quantity * product?.price} so'm</span>

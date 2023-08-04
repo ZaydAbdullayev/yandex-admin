@@ -39,7 +39,7 @@ export const MakedFoods = () => {
                         <p style={{ textTransform: "capitalize" }}>
                           {product?.name}
                         </p>
-                        <p>{product?.describtion}</p>
+                        <p>{product?.description}</p>
                       </pre>
                       <p>{product?.quantity} ta</p>
                     </figcaption>

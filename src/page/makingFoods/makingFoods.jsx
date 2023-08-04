@@ -13,19 +13,21 @@ export const MakingFoods = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    ApiGetService.fetching(`get/orders/${id}`)
-      .then((res) => {
-        setOrders(res?.data?.innerData);
-      })
-      .catch((err) => console.log(err));
+    setTimeout(() => {
+      ApiGetService.fetching(`get/orders/${id}`)
+        .then((res) => {
+          setOrders(res?.data?.innerData);
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
   }, [id, newOrder]);
 
   const orderAccept = (order) => {
-    setStution(order.order_id);
     ApiUpdateService.fetching(`update/status/${order.order_id}`, {
       status: order.status,
     })
       .then((res) => {
+        setStution(order.order_id);
         dispatch(acUpload());
       })
       .catch((err) => console.log(err));
@@ -64,7 +66,7 @@ export const MakingFoods = () => {
                         <p style={{ textTransform: "capitalize" }}>
                           {product?.name}
                         </p>
-                        <p>{product?.describtion}</p>
+                        <p>{product?.description}</p>
                       </pre>
                       <p>{product?.quantity} ta</p>
                     </figcaption>

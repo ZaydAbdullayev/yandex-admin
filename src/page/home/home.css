@@ -179,8 +179,7 @@
 }
 
 .accepted {
-    animation: accepted alternate 0.9s ease;
-    transition: all 0.9s ease;
+    animation: accepted alternate 1.5s ease;
 }
 
 @keyframes accepted {
@@ -188,10 +187,13 @@
         transform: translateX(0);
     }
 
-    100% {
+    90% {
         transform: translateX(-100%);
         position: fixed;
-        display: none;
         z-index: -9;
+    }
+
+    100% {
+        display: none;
     }
 }
