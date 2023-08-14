@@ -54,3 +54,31 @@ input {
         display: none;
     }
 }
+
+.stm-animate {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    position: fixed;
+    left: 50%;
+    transform: scale(0.5);
+    display: none;
+    z-index: 999;
+}
+
+.stm-animate.active {
+    display: block;
+    animation: mtanimation 0.4s ease-out forwards;
+}
+
+@keyframes mtanimation {
+    from {
+        transform: scale(0.2);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

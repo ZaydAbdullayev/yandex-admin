@@ -179,21 +179,6 @@
 }
 
 .accepted {
-    animation: accepted alternate 1.5s ease;
-}
-
-@keyframes accepted {
-    0% {
-        transform: translateX(0);
-    }
-
-    90% {
-        transform: translateX(-100%);
-        position: fixed;
-        z-index: -9;
-    }
-
-    100% {
-        display: none;
-    }
+    transform: translateX(-150%);
+    transition: all 1s cubic-bezier(0.895, 0.03, 0.685, 0.22);
 }

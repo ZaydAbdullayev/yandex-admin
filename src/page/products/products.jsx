@@ -9,6 +9,7 @@ import {
 import { NumericFormat } from "react-number-format";
 import { useSelector, useDispatch } from "react-redux";
 import { acUpload } from "../../redux/upload";
+import { enqueueSnackbar } from "notistack";
 
 import { GoSearch } from "react-icons/go";
 import { AiFillDelete } from "react-icons/ai";
@@ -40,7 +41,7 @@ export const Products = () => {
     });
     return Array.from(uniqueCategories);
   };
- 
+
   const uniqueCategories = getUniqueCategories();
   const category = (search && decodeURIComponent(search.split("=")[1])) || "";
 
@@ -51,6 +52,8 @@ export const Products = () => {
   const handleUpdate = (product) => {
     ApiUpdateService.fetching(`update/product/${product.id}`, product)
       .then((res) => {
+        const msg = "Mahsulot malumotlari muvoffaqiyatli o'zgartirildi!";
+        enqueueSnackbar(msg, { variant: "success" });
         dispatch(acUpload());
         setInfo({});
         setUpdate(false);
@@ -61,9 +64,27 @@ export const Products = () => {
   const handleDelete = (id) => {
     ApiDeleteService.fetching(`delete/product/${id}`)
       .then((res) => {
+        console.log(res);
+        const msg = "Mahsulotni O'zgartirishda qandaydir xatolik yuz berdi";
+        enqueueSnackbar(msg, { variant: "error" });
         dispatch(acUpload());
       })
       .catch((err) => console.log(err));
+  };
+
+  const updateImg = (product) => {
+    ApiUpdateService.fetching(`update/productImg/${product.id}`, {
+      img: product?.image,
+      deleteImg: product.deleteImg,
+    })
+      .then((res) => {
+        const msg = "Mahsulot rasmi muvoffaqiyatli o'zgartirildi!";
+        enqueueSnackbar(msg, { variant: "success" });
+        dispatch(acUpload());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const filteredProducts = products?.filter((product) => {
@@ -115,7 +136,11 @@ export const Products = () => {
                 type="file"
                 accept="image/*"
                 onChange={(e) =>
-                  handleUpdate({ id: product.id, img: e.target.files[0] })
+                  updateImg({
+                    id: product.id,
+                    image: e.target.files[0],
+                    deleteImg: product?.img,
+                  })
                 }
               />
               <img src={product?.img} alt="foto" />

@@ -8,11 +8,12 @@ import { RxCross1 } from "react-icons/rx";
 
 export const Home = () => {
   const user = JSON.parse(localStorage.getItem("user")) || [];
+  const newOrder = useSelector((state) => state.upload);
   const [stution, setStution] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [customer, setCustomer] = useState(null);
   const id = user?.user?.id;
   const dispatch = useDispatch();
-  const newOrder = useSelector((state) => state.upload);
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,7 +22,7 @@ export const Home = () => {
           setOrders(res?.data?.innerData);
         })
         .catch((err) => console.log(err));
-    }, 1000);
+    }, 800);
   }, [id, newOrder]);
 
   // to find oreder stution
@@ -57,6 +58,16 @@ export const Home = () => {
   };
 
   const currentOrder = orders.filter((item) => item.status === 0);
+  const user_id = currentOrder?.map((item) => item.user_id);
+
+  useEffect(() => {
+    ApiGetService.fetching(`get/user/${user_id}`)
+      .then((res) => {
+        setCustomer(res?.data?.innerData?.username);
+      })
+      .catch((err) => console.log(err));
+  }, [user_id]);
+
   return (
     <div className="home_page">
       <div className="oreders">
@@ -64,7 +75,6 @@ export const Home = () => {
         <div className="orders_body">
           {currentOrder?.map((order) => {
             const products = JSON.parse(order?.product_data);
-            const first = products.find(({ status }) => status === "1");
             const status = products.find(({ status }) => status === "2");
             const change = products.find(({ status }) => status === "3");
             const time = order.receivedAt
@@ -78,12 +88,12 @@ export const Home = () => {
               >
                 <figure className="order_item ">
                   <div>
-                    Buyurtmachi : {order.user_id}{" "}
-                    <span>buyurtma idsi : {order?.id}</span>{" "}
+                    Buyurtmachi : {customer}{" "}
+                    <span>Buyurtma ID № : {order?.id}</span>{" "}
                     <div className="btn_box">
                       <button
                         onClick={() =>
-                          orderAccept({ order_id: order.id, status: 2 })
+                          orderAccept({ order_id: order.id, status: 6 })
                         }
                       >
                         Hammasini bekor qilish
@@ -165,9 +175,8 @@ export const Home = () => {
                     backword
                   </button>
                   <button
-                    onClick={
-                      !first &&
-                      (() => orderAccept({ order_id: order.id, status: 1 }))
+                    onClick={() =>
+                      orderAccept({ order_id: order.id, status: 1 })
                     }
                     style={status ? { marginTop: "1.5%", zIndex: "9" } : {}}
                   >
