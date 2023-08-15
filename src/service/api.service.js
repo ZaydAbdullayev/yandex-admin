@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const base_url = "https://yandex.sp-school58.uz";
+const base_url = "https://server.foodify.uz";
 
 const user = JSON.parse(localStorage.getItem("user")) || [];
 

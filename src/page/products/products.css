@@ -34,7 +34,6 @@
 .search_box>input {
     width: calc(100% - 50px);
     height: 100%;
-    padding: 0 3%;
     background: none;
     border: none;
     outline: none;
