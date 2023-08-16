@@ -29,7 +29,7 @@ export const MakedFoods = () => {
               <figure className="cooking_food">
                 <div>
                   <span>buyurtma idsi : {order?.id}</span>{" "}
-                  <span>Taxsi qabul qilishini kutilmoqda...</span>
+                  <span>Taxi qabul qilishini kutilmoqda...</span>
                 </div>
                 {products?.map((product) => {
                   return (
