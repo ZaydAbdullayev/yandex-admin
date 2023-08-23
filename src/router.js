@@ -12,6 +12,7 @@ import { Addproduct } from "./components/Addproduct/addproduct";
 import { Products } from "./page/products/products";
 import { MakingFoods } from "./page/makingFoods/makingFoods";
 import { MakedFoods } from "./page/makedFoods/maked";
+import { Statistics } from "./components/statistics/layout.statis";
 
 export const Router = () => {
   const login = JSON.parse(localStorage.getItem("user")) || [];
@@ -47,6 +48,7 @@ export const Router = () => {
         <Route path="/" element={<Auth />}>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="statistics" element={<Statistics />} />
             <Route path="sidebar" element={<Sidebar />} />
             <Route path="product" element={<Products />} />
             <Route path="product/add" element={<Addproduct />} />

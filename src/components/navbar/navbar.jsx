@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { BsSearch } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
+import { ImStatsBars } from "react-icons/im";
 import default_img from "../../assets/images/default-img.png";
 
 export const Navbar = () => {
@@ -36,7 +37,12 @@ export const Navbar = () => {
         <input type="search" name="search" placeholder="search" required />
       </form>
       <div className="profile">
-        <FaBell />
+        <span onClick={() => navigate("/statistics")}>
+          <ImStatsBars />
+        </span>
+        <span>
+          <FaBell />
+        </span>
         <img
           src={user?.user?.img || default_img}
           alt="user_photo"
