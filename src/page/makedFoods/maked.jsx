@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ApiGetService } from "../../service/api.service";
 
 export const MakedFoods = () => {
-  const user = JSON.parse(localStorage.getItem("user")) || [];
+  const user = JSON?.parse(localStorage?.getItem("user")) || [];
   const newOrder = useSelector((state) => state.upload);
   const [orders, setOrders] = useState([]);
   const id = user?.user?.id;
@@ -16,14 +16,17 @@ export const MakedFoods = () => {
       .catch((err) => console.log(err));
   }, [id, newOrder]);
 
-  const currentOrder = orders?.filter((item) => item.status === 2);
+  const currentOrder = orders?.filter((item) => item?.status === 2);
   return (
     <div className="making_foods_box">
-      <h1>Tayyorlanayotgan taomlar</h1>
+      <h1>Tayyor bo'lgan taomlar</h1>
       <div className="orders_body">
         {currentOrder?.map((order) => {
-          const products = JSON.parse(order?.product_data);
-          const time = order.receivedAt.substring(0, 19).split("T").join(" | ");
+          const products = order?.product_data && JSON?.parse(order?.product_data);
+          const time = order?.receivedAt
+            ?.substring(0, 19)
+            ?.split("T")
+            ?.join(" | ");
           return (
             <div key={order?.id}>
               <figure className="cooking_food">
@@ -31,20 +34,21 @@ export const MakedFoods = () => {
                   <span>buyurtma idsi : {order?.id}</span>{" "}
                   <span>Taxi qabul qilishini kutilmoqda...</span>
                 </div>
-                {products?.map((product) => {
-                  return (
-                    <figcaption key={product?.id} className="order_product">
-                      <img src={product.img} alt="foto" />
-                      <pre>
-                        <p style={{ textTransform: "capitalize" }}>
-                          {product?.name}
-                        </p>
-                        <p>{product?.description}</p>
-                      </pre>
-                      <p>{product?.quantity} ta</p>
-                    </figcaption>
-                  );
-                })}
+                {products.length &&
+                  products?.map((product) => {
+                    return (
+                      <figcaption key={product?.id} className="order_product">
+                        <img src={product?.img} alt="foto" />
+                        <pre>
+                          <p style={{ textTransform: "capitalize" }}>
+                            {product?.name}
+                          </p>
+                          <p>{product?.description}</p>
+                        </pre>
+                        <p>{product?.quantity} ta</p>
+                      </figcaption>
+                    );
+                  })}
                 <p className="time">{time}</p>
               </figure>
             </div>

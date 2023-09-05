@@ -77,10 +77,11 @@ export const Home = () => {
             const products = JSON.parse(order?.product_data);
             const status = products.find(({ status }) => status === "2");
             const change = products.find(({ status }) => status === "3");
-            const time = order.receivedAt
-              .substring(0, 19)
-              .split("T")
-              .join(" | ");
+            const time = order.receivedAt.toLocalString("en-US", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
+            });
             return (
               <div
                 key={order?.id}
@@ -169,7 +170,7 @@ export const Home = () => {
                             marginTop: "1.5%",
                             zIndex: "9",
                           }
-                        : {}
+                        : { display: "none" }
                     }
                   >
                     backword
@@ -178,7 +179,11 @@ export const Home = () => {
                     onClick={() =>
                       orderAccept({ order_id: order.id, status: 1 })
                     }
-                    style={status ? { marginTop: "1.5%", zIndex: "9" } : {}}
+                    style={
+                      status
+                        ? { marginTop: "1.5%", zIndex: "9" }
+                        : { display: "none" }
+                    }
                   >
                     Tayyorlashga berish
                   </button>

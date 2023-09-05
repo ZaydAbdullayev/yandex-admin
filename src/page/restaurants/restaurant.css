@@ -97,6 +97,7 @@
     z-index: 99;
 }
 
+
 .add_reastaurant>button::after {
     content: "";
     position: absolute;
@@ -109,7 +110,7 @@
     z-index: -9;
 }
 
-.add_reastaurant>button:active::after{
+.add_reastaurant>button:active::after {
     background: #444;
 }
 

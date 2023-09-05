@@ -28,7 +28,7 @@ export const Sidebar = () => {
 
   return (
     <div className={isShrinkView ? "shrink" : "sidebar_container"}>
-      <Link to="/">{isShrinkView ? "Y" : "Yandex@Eats"}</Link>
+      <Link to="/">{isShrinkView ? "F" : "Foodify"}</Link>
       <div className="shrink_box">
         <h3 onClick={handleSidebarView}>
           {isShrinkView ? <RiMenu2Line /> : "Dashboard Menu"}

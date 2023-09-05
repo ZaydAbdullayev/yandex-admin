@@ -33,14 +33,15 @@ export const MakingFoods = () => {
       .catch((err) => console.log(err));
   };
 
-  const currentOrder = orders?.filter((item) => item.status === 1);
+  const currentOrder = orders?.filter((item) => item.status === 2);
 
   return (
     <div className="making_foods_box">
       <h1>Tayyorlanayotgan taomlar</h1>
       <div className="orders_body">
         {currentOrder?.map((order) => {
-          const products = JSON.parse(order?.product_data);
+          const products =
+            order?.product_data && JSON.parse(order?.product_data);
           const time = order.receivedAt.substring(0, 19).split("T").join(" | ");
           return (
             <div
@@ -52,26 +53,27 @@ export const MakingFoods = () => {
                   <span>buyurtma idsi : {order?.id}</span>{" "}
                   <button
                     onClick={() =>
-                      orderAccept({ order_id: order.id, status: 2 })
+                      orderAccept({ order_id: order.id, status: 3 })
                     }
                   >
                     Buyurtma tayyor
                   </button>
                 </div>
-                {products?.map((product) => {
-                  return (
-                    <figcaption key={product?.id} className="order_product">
-                      <img src={product.img} alt="foto" />
-                      <pre>
-                        <p style={{ textTransform: "capitalize" }}>
-                          {product?.name}
-                        </p>
-                        <p>{product?.description}</p>
-                      </pre>
-                      <p>{product?.quantity} ta</p>
-                    </figcaption>
-                  );
-                })}
+                {products.length &&
+                  products?.map((product) => {
+                    return (
+                      <figcaption key={product?.id} className="order_product">
+                        <img src={product.img} alt="foto" />
+                        <pre>
+                          <p style={{ textTransform: "capitalize" }}>
+                            {product?.name}
+                          </p>
+                          <p>{product?.description}</p>
+                        </pre>
+                        <p>{product?.quantity} ta</p>
+                      </figcaption>
+                    );
+                  })}
                 <p className="time">{time}</p>
               </figure>
             </div>
